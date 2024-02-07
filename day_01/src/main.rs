@@ -7,10 +7,12 @@ fn main() {
     let mut input = String::new();
     file.read_to_string(&mut input).unwrap();
 
+    println!("-- Begin processing --");
+
     part_1(&input);
     part_2(&input);
 
-    println!("-- Done processing --");
+    println!("-- Done processing  --");
 }
 
 fn part_1(input: &str) {
