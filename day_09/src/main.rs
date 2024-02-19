@@ -18,8 +18,7 @@ fn main() {
 fn part_1(input: &str) {
     let mut positions_head: HashSet<(i32, i32)> = HashSet::from([(0,0)]);
     let mut positions_tail: HashSet<(i32, i32)> = HashSet::from([(0,0)]);
-    let mut head_pos: (i32, i32) = (0,0);
-    let mut tail_pos: Vec<(i32, i32)> = Vec::from(vec![(0,0);9]);
+    let mut tail_pos: Vec<(i32, i32)> = Vec::from(vec![(0,0);10]);
     
     for op in input.lines() {
         let ops: Vec<&str> = op.split_whitespace().collect();
@@ -28,33 +27,26 @@ fn part_1(input: &str) {
 
         for _i in 0..amount {
             match direction {
-                "D" => head_pos = (head_pos.0, head_pos.1 - 1),
-                "L" => head_pos = (head_pos.0 - 1, head_pos.1),
-                "R" => head_pos = (head_pos.0 + 1, head_pos.1),
-                _ => head_pos = (head_pos.0, head_pos.1 + 1),
+                "D" => tail_pos[0] = (tail_pos[0].0, tail_pos[0].1 - 1),
+                "L" => tail_pos[0] = (tail_pos[0].0 - 1, tail_pos[0].1),
+                "R" => tail_pos[0] = (tail_pos[0].0 + 1, tail_pos[0].1),
+                _ => tail_pos[0] = (tail_pos[0].0, tail_pos[0].1 + 1),
             }
 
-            for i in 0..=8 {
-                let temp_head: (i32, i32); 
-                
-                if i > 1 {
-                    temp_head = tail_pos[i-i];
-                } else {
-                    temp_head = head_pos;
-                }
+            for i in 1..=9 {
 
                 let mut diff = (
-                    temp_head.0 - tail_pos[i].0,
-                    temp_head.1 - tail_pos[i].1,
+                    tail_pos[i-1].0 - tail_pos[i].0,
+                    tail_pos[i-1].1 - tail_pos[i].1,
                 );
 
                 let abs_diff = (
-                    i32::abs_diff(temp_head.0, tail_pos[i].0),
-                    i32::abs_diff(temp_head.1, tail_pos[i].1)
+                    i32::abs_diff(tail_pos[i-1].0, tail_pos[i].0),
+                    i32::abs_diff(tail_pos[i-1].1, tail_pos[i].1)
                 );
                 
                 // withing the proper distance 
-                if abs_diff.0 != 2 && abs_diff.1 != 2 {
+                if abs_diff.0 < 2 && abs_diff.1 < 2 {
                     diff = (0,0);
                 } 
                 
@@ -70,8 +62,8 @@ fn part_1(input: &str) {
                 tail_pos[i].1 += diff.1;
             }
 
-            positions_head.insert(tail_pos[0]);
-            positions_tail.insert(tail_pos[8]);
+            positions_head.insert(tail_pos[1]);
+            positions_tail.insert(tail_pos[9]);
         }
 
         
