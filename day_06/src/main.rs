@@ -1,4 +1,4 @@
-use std::collections::VecDeque;
+use std::collections::{HashMap, VecDeque};
 use std::fs::File;
 use std::io::Read;
 
@@ -14,6 +14,12 @@ fn main() {
     part_2(&input);
 
     println!("-- Done processing  --");
+}
+
+struct Node {
+    file: bool, 
+    size: u64, 
+    children: Vec<Node>
 }
 
 fn part_1(input: &str) {
