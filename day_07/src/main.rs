@@ -58,7 +58,7 @@ fn part_1(input: &str) {
     let space_needed = 30000000 - free_space_now;
     let mut smallest: u64 = 70000000; 
 
-    for (folder, size) in folder_sizes {
+    for (_folder, size) in folder_sizes {
         
         if size <= 100000 {
             result += size; 
