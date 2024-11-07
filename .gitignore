@@ -1,14 +1,3 @@
-day_01/target/
 template.rs
-day_02/target/
-day_03/target/
-day_04/target/
-day_05/target/
-day_06/target/
-day_07/target/
-day_08/target/
-day_09/target/
-day_10/target/
-day_11/target/
-day_12/target/
-day_13/target/
+*/target/*
+
